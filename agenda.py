@@ -9,3 +9,6 @@ class Agenda:
     def configurar_expediente_medico(self, inicio, fim):
         self.horario_inicio = inicio
         self.horario_fim = fim
+
+    def agendar_consulta(self, paciente, horario_consulta):
+        self.consultas_marcadas[horario_consulta] = paciente

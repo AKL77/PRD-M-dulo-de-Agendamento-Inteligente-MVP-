@@ -22,4 +22,4 @@ class TestAgenda(TestCase):
 
         agenda.agendar_consulta(paciente, horario_consulta)
 
-        self.assertEqual(agenda.consultas_marcadas, 9)
+        self.assertEqual(agenda.consultas_marcadas[horario_consulta], paciente)
