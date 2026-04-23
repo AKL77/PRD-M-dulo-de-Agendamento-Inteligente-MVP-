@@ -1,5 +1,6 @@
 from unittest import TestCase
 from agenda import Agenda
+from datetime import datetime
 
 class TestAgenda(TestCase):
     def test_definir_horario_medico(self):
@@ -9,3 +10,16 @@ class TestAgenda(TestCase):
 
         self.assertEqual(agenda.horario_inicio, "08:00")
         self.assertEqual(agenda.horario_fim, "12:00")
+
+    def test_agendamento_consulta(self):
+        agenda = Agenda()
+
+        agenda.configurar_expediente_medico(inicio = "08:00", fim = "12:00")
+
+        horario_consulta = datetime(2026, 4, 24, 9, 0)
+
+        paciente = "03114976085"
+
+        agenda.agendar_consulta(paciente, horario_consulta)
+
+        self.assertEqual(agenda.consultas_marcadas, 9)
