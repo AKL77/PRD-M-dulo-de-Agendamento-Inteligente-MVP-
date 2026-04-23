@@ -1,4 +1,5 @@
 from unittest import TestCase
+from agenda import Agenda
 
 class TestAgenda(TestCase):
     def test_definir_horario_medico(self):
