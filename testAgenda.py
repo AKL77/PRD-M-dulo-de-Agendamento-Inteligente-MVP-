@@ -6,15 +6,25 @@ class TestAgenda(TestCase):
     def test_definir_horario_medico(self):
         agenda = Agenda()
 
-        agenda.configurar_expediente_medico(inicio = time(8, 0), fim = time(12, 0))
+        # agenda.configurar_expediente_medico(inicio = time(8, 0), fim = time(12, 0))
 
-        self.assertEqual(agenda.horario_inicio_expediente, time(8, 0))
-        self.assertEqual(agenda.horario_fim_expediente, time(12, 0))
+        #self.assertEqual(agenda.horario_inicio_expediente, time(8, 0))
+        #self.assertEqual(agenda.horario_fim_expediente, time(12, 0))
+
+        agenda.configurar_expediente_medico(dia_semana = 0, inicio = time(8, 0), fim = time(12, 0))
+        agenda.configurar_expediente_medico(dia_semana = 1, inicio = time(12, 0), fim = time(16, 0))
+
+        self.assertEqual(agenda.grade_horarios_de_atendimento[0]["inicio"], time(8, 0))
+        self.assertEqual(agenda.grade_horarios_de_atendimento[0]["fim"], time(12, 0))
+        
+        self.assertEqual(agenda.grade_horarios_de_atendimento[1]["inicio"], time(12, 0))
+        self.assertEqual(agenda.grade_horarios_de_atendimento[1]["fim"], time(16, 0))
+
 
     def test_agendamento_consulta(self):
         agenda = Agenda()
 
-        agenda.configurar_expediente_medico(inicio = time(8, 0), fim = time(12, 0))
+        agenda.configurar_expediente_medico(dia_semana = 4, inicio = time(8, 0), fim = time(12, 0))
 
         horario_consulta = datetime(2026, 4, 24, 9, 0)
 
@@ -28,7 +38,7 @@ class TestAgenda(TestCase):
     def test_agendamento_consulta_horario_indisponivel(self):
         agenda = Agenda()
 
-        agenda.configurar_expediente_medico(inicio = time(8, 0), fim = time(12, 0))
+        agenda.configurar_expediente_medico(dia_semana = 4, inicio = time(8, 0), fim = time(12, 0))
 
         horario_consulta = datetime(2026, 4, 24, 7, 0)
 
@@ -43,7 +53,7 @@ class TestAgenda(TestCase):
     def test_agendamento_consulta_horario_ja_agendado(self):
         agenda = Agenda()
 
-        agenda.configurar_expediente_medico(inicio = time(8, 0), fim = time(12, 0))
+        agenda.configurar_expediente_medico(dia_semana = 4, inicio = time(8, 0), fim = time(12, 0))
 
         horario_consulta_1 = datetime(2026, 4, 24, 8, 0)
         paciente_1 = "031.149.760-85"
@@ -62,7 +72,7 @@ class TestAgenda(TestCase):
     def test_agendamento_consultas_com_intesercao(self):
         agenda = Agenda()
 
-        agenda.configurar_expediente_medico(inicio = time(8, 0), fim = time(12, 0))
+        agenda.configurar_expediente_medico(dia_semana = 4, inicio = time(8, 0), fim = time(12, 0))
 
         horario_consulta_1 = datetime(2026, 4, 24, 8, 0)
         paciente_1 = "031.149.760-85"
@@ -81,7 +91,7 @@ class TestAgenda(TestCase):
 
     def test_agendamento_consulta_duracao_diferente(self):
         agenda = Agenda()
-        agenda.configurar_expediente_medico(inicio = time(8, 0), fim = time(12, 0))
+        agenda.configurar_expediente_medico(dia_semana = 4, inicio = time(8, 0), fim = time(12, 0))
 
         horario_1 = datetime(2026, 4, 24, 8, 0)
         paciente_1 = "676.767.676-67"
