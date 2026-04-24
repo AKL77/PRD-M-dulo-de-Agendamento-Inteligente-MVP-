@@ -10,13 +10,12 @@ class Agenda:
         self.horario_inicio_expediente = inicio
         self.horario_fim_expediente = fim
 
-    def agendar_consulta(self, paciente, horario_consulta):
+    def agendar_consulta(self, paciente, horario_consulta, duracao_consulta):
         horas = horario_consulta.time()
 
         if not (self.horario_inicio_expediente <= horas <= self.horario_fim_expediente):
             return "O horário informado não é contemplado pelo médico"
 
-        duracao_consulta = timedelta(minutes=30)
         inicio_agendamento_em_potencial = horario_consulta
         fim_agendamento_em_potencial = inicio_agendamento_em_potencial + duracao_consulta
 
