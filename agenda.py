@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, time
 
 class Agenda:
     def __init__(self):
@@ -11,4 +11,9 @@ class Agenda:
         self.horario_fim = fim
 
     def agendar_consulta(self, paciente, horario_consulta):
-        self.consultas_marcadas[horario_consulta] = paciente
+        horas = horario_consulta.time()
+
+        if(self.horario_inicio <= horas <= self.horario_fim):
+            self.consultas_marcadas[horario_consulta] = paciente
+        else:
+            return "O horário informado não é contemplado pelo médico"
