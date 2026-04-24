@@ -23,7 +23,7 @@ class TestAgenda(TestCase):
         duracao_consulta = timedelta(minutes=30)
         agenda.agendar_consulta(paciente, horario_consulta, duracao_consulta)
 
-        self.assertEqual(agenda.consultas_marcadas[horario_consulta], paciente)
+        self.assertEqual(agenda.consultas_marcadas[horario_consulta]["paciente"], paciente)
 
     def test_agendamento_consulta_horario_indisponivel(self):
         agenda = Agenda()
@@ -50,7 +50,7 @@ class TestAgenda(TestCase):
         duracao_consulta_1 = timedelta(minutes=30)
         agendamento_1 = agenda.agendar_consulta(paciente_1, horario_consulta_1, duracao_consulta_1)
 
-        self.assertEqual(agenda.consultas_marcadas[horario_consulta_1], paciente_1)
+        self.assertEqual(agenda.consultas_marcadas[horario_consulta_1]["paciente"], paciente_1)
 
         horario_consulta_2 = datetime(2026, 4, 24, 8, 0)
         paciente_2 = "777.777.777-77"
@@ -69,7 +69,7 @@ class TestAgenda(TestCase):
         duracao_consulta_1 = timedelta(minutes=30)
         agendamento_1 = agenda.agendar_consulta(paciente_1, horario_consulta_1, duracao_consulta_1)
 
-        self.assertEqual(agenda.consultas_marcadas[horario_consulta_1], paciente_1)
+        self.assertEqual(agenda.consultas_marcadas[horario_consulta_1]["paciente"], paciente_1)
 
         horario_consulta_2 = datetime(2026, 4, 24, 8, 15)
         paciente_2 = "777.777.777-77"
