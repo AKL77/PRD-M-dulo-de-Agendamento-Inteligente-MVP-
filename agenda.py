@@ -14,6 +14,9 @@ class Agenda:
         horas = horario_consulta.time()
 
         if(self.horario_inicio <= horas <= self.horario_fim):
-            self.consultas_marcadas[horario_consulta] = paciente
+            if(horario_consulta in self.consultas_marcadas):
+                return "O horário informado não já está ocupado por outro agendamento. Escolha outro horário"
+            else:
+                self.consultas_marcadas[horario_consulta] = paciente
         else:
             return "O horário informado não é contemplado pelo médico"
