@@ -1,22 +1,30 @@
-from datetime import datetime, time
+from datetime import datetime, time, timedelta
 
 class Agenda:
     def __init__(self):
         self.consultas_marcadas = {}
-        self.horario_inicio = None
-        self.horario_fim = None
+        self.horario_inicio_expediente = None
+        self.horario_fim_expediente = None
 
     def configurar_expediente_medico(self, inicio, fim):
-        self.horario_inicio = inicio
-        self.horario_fim = fim
+        self.horario_inicio_expediente = inicio
+        self.horario_fim_expediente = fim
 
     def agendar_consulta(self, paciente, horario_consulta):
         horas = horario_consulta.time()
 
-        if(self.horario_inicio <= horas <= self.horario_fim):
-            if(horario_consulta in self.consultas_marcadas):
-                return "O horário informado não já está ocupado por outro agendamento. Escolha outro horário"
-            else:
-                self.consultas_marcadas[horario_consulta] = paciente
-        else:
+        if not (self.horario_inicio_expediente <= horas <= self.horario_fim_expediente):
             return "O horário informado não é contemplado pelo médico"
+
+        duracao_consulta = timedelta(minutes=30)
+        inicio_agendamento_em_potencial = horario_consulta
+        fim_agendamento_em_potencial = inicio_agendamento_em_potencial + duracao_consulta
+
+        for horario_existente in self.consultas_marcadas:
+            inicio_de_agendamento_existente = horario_existente
+            fim_de_agendamento_existente = inicio_de_agendamento_existente + duracao_consulta
+
+            if inicio_agendamento_em_potencial < fim_de_agendamento_existente and inicio_de_agendamento_existente < fim_agendamento_em_potencial:
+                return "O horário informado já está ocupado por outro agendamento. Escolha outro horário"
+
+        self.consultas_marcadas[horario_consulta] = paciente
