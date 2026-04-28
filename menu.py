@@ -18,9 +18,33 @@ def main():
         opcao = input("Para escolher uma opção informe o número correspondente\n")
 
         if opcao == "1":
-            print("\n" + "*"*20)
-            print("CONSULTAS AGENDADAS")
-            print(sistema_agenda.listar_consultas())
+            print("Quer verificar as consultas de um dia específico ou consultar todos os agendamentos?")
+            print("1 - Verificar consultas marcadas para um dia específico")
+            print("2 - Verificar todas as consultas marcadas")
+            escolha = input()
+
+            if escolha == "1":
+                print("Serão necessárias as seguintes informações para verificar as consultas agendadas em um dia específico:")
+                try:
+                    ano_consulta = int(input("Informe o ano:\n"))
+                    mes_consulta = int(input("Informe o mês:\n"))
+                    dia_consulta = int(input("Informe o dia:\n"))
+
+                    data_buscada = datetime(ano_consulta, mes_consulta, dia_consulta).date()
+                    
+                    resultado_busca = sistema_agenda.listar_consultas_por_dia(data_buscada)
+                    
+                    print("\n" + "*"*30)
+                    print(resultado_busca)
+                    print("*"*30 + "\n")
+                    
+                except ValueError:
+                    print("\nErro: A data informada é inválida.")
+
+            elif escolha == "2":
+                print("\n" + "*"*20)
+                print("CONSULTAS AGENDADAS")
+                print(sistema_agenda.listar_consultas())
         elif opcao == "2":
             print("Para realizar o agendamento informe as seguintes informações:")
 
