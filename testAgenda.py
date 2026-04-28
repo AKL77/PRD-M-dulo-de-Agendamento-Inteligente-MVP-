@@ -110,4 +110,39 @@ class TestAgenda(TestCase):
 
         self.assertEqual(resultado, resultado_esperado)
 
+    def test_listar_consultas_dia_especifico(self):
+        agenda = Agenda()
+
+        agenda.configurar_expediente_medico(dia_semana=2, inicio=time(8, 0), fim=time(12, 0))
+        agenda.configurar_expediente_medico(dia_semana=3, inicio=time(8, 0), fim=time(12, 0))
+
+        horario_consulta_3 = datetime(2026, 4, 29, 10, 0)
+        paciente_3 = "676.767.676-76"
+        duracao_consulta_3 = timedelta(minutes=30)
+
+        agenda.agendar_consulta(paciente_3, horario_consulta_3, duracao_consulta_3)
+
+        horario_consulta_2 = datetime(2026, 4, 30, 10, 0)
+        paciente_2 = "676.767.676-76"
+        duracao_consulta_2 = timedelta(minutes=30)
+
+        agenda.agendar_consulta(paciente_2, horario_consulta_2, duracao_consulta_2)
+
+        horario_consulta_1 = datetime(2026, 4, 29, 8, 0)
+        paciente_1 = "031.149.760-85"
+        duracao_consulta_1 = timedelta(minutes=45)
+
+        agenda.agendar_consulta(paciente_1, horario_consulta_1, duracao_consulta_1)
+
+        data_busca = datetime(2026, 4, 29).date()
+
+        resultado = agenda.listar_consultas_por_dia(data_busca)
+
+        resultado_esperado = (
+            "[29/04/2026] 08:00 às 09:00 | Paciente (CPF): 333.333.333-33\n"
+            "[29/04/2026] 10:00 às 10:30 | Paciente (CPF): 111.111.111-11"
+        )
+
+        self.assertEqual(resultado, resultado_esperado)
+
 
