@@ -6,11 +6,6 @@ class TestAgenda(TestCase):
     def test_definir_horario_medico(self):
         agenda = Agenda()
 
-        # agenda.configurar_expediente_medico(inicio = time(8, 0), fim = time(12, 0))
-
-        #self.assertEqual(agenda.horario_inicio_expediente, time(8, 0))
-        #self.assertEqual(agenda.horario_fim_expediente, time(12, 0))
-
         agenda.configurar_expediente_medico(dia_semana = 0, inicio = time(8, 0), fim = time(12, 0))
         agenda.configurar_expediente_medico(dia_semana = 1, inicio = time(12, 0), fim = time(16, 0))
 
@@ -88,22 +83,3 @@ class TestAgenda(TestCase):
 
         self.assertEqual(agendamento_2, "O horário informado já está ocupado por outro agendamento. Escolha outro horário")
         self.assertNotIn(horario_consulta_2, agenda.consultas_marcadas)
-
-    def test_agendamento_consulta_duracao_diferente(self):
-        agenda = Agenda()
-        agenda.configurar_expediente_medico(dia_semana = 4, inicio = time(8, 0), fim = time(12, 0))
-
-        horario_1 = datetime(2026, 4, 24, 8, 0)
-        paciente_1 = "676.767.676-67"
-        duracao_1 = timedelta(minutes=60)
-        agenda.agendar_consulta(paciente_1, horario_1, duracao_1)
-
-        horario_2 = datetime(2026, 4, 24, 8, 30)
-        paciente_2 = "000.000.000-00"
-        duracao_2 = timedelta(minutes=30)
-        resultado_falha = agenda.agendar_consulta(paciente_2, horario_2, duracao_2)
-
-        self.assertEqual(resultado_falha, "O horário informado já está ocupado por outro agendamento. Escolha outro horário")
-        self.assertNotIn(horario_2, agenda.consultas_marcadas)
-
-

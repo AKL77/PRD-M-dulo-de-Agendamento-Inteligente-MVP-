@@ -3,13 +3,9 @@ from datetime import datetime, time, timedelta
 class Agenda:
     def __init__(self):
         self.consultas_marcadas = {}
-        # self.horario_inicio_expediente = None
-        # self.horario_fim_expediente = None
         self.grade_horarios_de_atendimento = {}
 
     def configurar_expediente_medico(self, dia_semana, inicio, fim):
-        # self.horario_inicio_expediente = inicio
-        # self.horario_fim_expediente = fim
         self.grade_horarios_de_atendimento[dia_semana] = {
             "inicio": inicio,
             "fim": fim
