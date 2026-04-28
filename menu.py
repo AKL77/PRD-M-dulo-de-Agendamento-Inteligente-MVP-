@@ -31,42 +31,34 @@ def main():
             duracao_informada_agendamento = int(input("Duração da consulta\n"))
 
             horario_consulta = datetime(ano_agendamento, mes_agendamento, dia_agendamento, hora_agendamento, minutagem_agendamento)
-
             duracao_consulta = timedelta(minutes = duracao_informada_agendamento)
-
             resultado = sistema_agenda.agendar_consulta(cpf_paciente, horario_consulta, duracao_consulta)
 
             print(resultado)
         elif opcao == "3":
             print("Para editar o expediente do médico é necessário informar as seguintes informações")
 
-            dia_semana = int(input("Qual dia da semana deseja editar: \n"))
-            print("0 -> Segunda-feira \n")
-            print("1 -> Terça-feira \n")
-            print("2 -> Quarta-feira \n")
-            print("3 -> Quinta-feira \n")
-            print("4 -> Sexta-feira \n")
-            print("5 -> Sábado \n")
-            print("6 -> Domingo \n")
+            print("Qual dia da semana deseja editar:")
+            print("0 -> Segunda-feira")
+            print("1 -> Terça-feira")
+            print("2 -> Quarta-feira")
+            print("3 -> Quinta-feira")
+            print("4 -> Sexta-feira")
+            print("5 -> Sábado")
+            print("6 -> Domingo")
+            dia_semana = int(input())
 
             hora_inicio_expediente = int(input("Hora de início do expediente: (ex: 8 para 08:00)\n"))
-
             minutagem_inicio_expediente = int(input("Minutagem de início do expediente: (ex: 30)\n"))
-
             print(f"Horário de início informado: {hora_inicio_expediente:02d}:{minutagem_inicio_expediente:02d}")
 
-
             hora_fim_expediente = int(input("Horário de fim do expediente: (ex: 18 para 18:00)\n"))
-
             minutagem_fim_expediente = int(input("Minutagem de fim do expediente: (ex: 30)\n"))
-
             print(f"Horário de fim informado: {hora_fim_expediente:02d}:{minutagem_fim_expediente:02d}")
 
             inicio = time(hora_inicio_expediente, minutagem_inicio_expediente)
-
             fim = time(hora_fim_expediente, minutagem_fim_expediente)
-
-            sistema_agenda.agendar_consulta(dia_semana, inicio, fim)
+            sistema_agenda.configurar_expediente_medico(dia_semana, inicio, fim)
 
             try:
                 if inicio >= fim:

@@ -53,7 +53,7 @@ class TestAgenda(TestCase):
         horario_consulta_1 = datetime(2026, 4, 24, 8, 0)
         paciente_1 = "031.149.760-85"
         duracao_consulta_1 = timedelta(minutes=30)
-        agendamento_1 = agenda.agendar_consulta(paciente_1, horario_consulta_1, duracao_consulta_1)
+        agenda.agendar_consulta(paciente_1, horario_consulta_1, duracao_consulta_1)
 
         self.assertEqual(agenda.consultas_marcadas[horario_consulta_1]["paciente"], paciente_1)
 
@@ -72,7 +72,7 @@ class TestAgenda(TestCase):
         horario_consulta_1 = datetime(2026, 4, 24, 8, 0)
         paciente_1 = "031.149.760-85"
         duracao_consulta_1 = timedelta(minutes=30)
-        agendamento_1 = agenda.agendar_consulta(paciente_1, horario_consulta_1, duracao_consulta_1)
+        agenda.agendar_consulta(paciente_1, horario_consulta_1, duracao_consulta_1)
 
         self.assertEqual(agenda.consultas_marcadas[horario_consulta_1]["paciente"], paciente_1)
 
@@ -83,3 +83,31 @@ class TestAgenda(TestCase):
 
         self.assertEqual(agendamento_2, "O horário informado já está ocupado por outro agendamento. Escolha outro horário")
         self.assertNotIn(horario_consulta_2, agenda.consultas_marcadas)
+
+    def test_listar_consultas_agendadas_cronologicamente(self):
+        agenda = Agenda()
+
+        agenda.configurar_expediente_medico(dia_semana = 4, inicio = time(8, 0), fim = time(12, 0))
+
+        horario_consulta_2 = datetime(2026, 4, 29, 10, 0)
+        paciente_2 = "676.767.676-76"
+        duracao_consulta_2 = timedelta(minutes=30)
+
+        agenda.agendar_consulta(paciente_2, horario_consulta_2, duracao_consulta_2)
+
+        horario_consulta_1 = datetime(2026, 4, 29, 8, 0)
+        paciente_1 = "031.149.760-85"
+        duracao_consulta_1 = timedelta(minutes=45)
+
+        agenda.agendar_consulta(paciente_1, horario_consulta_1, duracao_consulta_1)
+
+        resultado = agenda.listar_consultas()
+
+        resultado_esperado = (
+            "[29/04/2026] 08:00 às 08:45 | Paciente (CPF): 031.149.760-85\n"
+            "[29/04/2026] 10:00 às 10:30 | Paciente (CPF): 676.767.676-76"
+        )
+
+        self.assertEqual(resultado, resultado_esperado)
+
+

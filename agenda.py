@@ -39,3 +39,5 @@ class Agenda:
             "paciente": paciente,
             "duracao": duracao_consulta_em_potencial
         }
+
+        return "Agendamento realizado com sucesso!"
