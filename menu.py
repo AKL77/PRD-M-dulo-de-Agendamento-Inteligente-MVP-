@@ -16,20 +16,28 @@ def main():
         exibir_menu_inicial()
         opcao = input("Para escolher uma opção informe o número correspondente\n")
 
-        if opcao == 1:
+        if opcao == "1":
             break
-        elif opcao == 2:
+        elif opcao == "2":
             print("Para realizar o agendamento informe as seguintes informações:")
 
-            cpf_paciente = input("CPF do paciente")
-            dia_agendamento = input("Dia do agendamento")
-            mes_agendamento = input("Mês do agendamento")
-            ano = input("Ano do agendamento")
-            horario_agendamento = input("Hora desejada para o agendamento (ex: 9 para 09:00)")
-            minutagem_agendamento = input("Informe a minutagem do agendamento (ex: ex: 30)")
-            duracao_consulta = input("Duração da consulta")
+            cpf_paciente = input("CPF do paciente\n")
+            dia_agendamento = int(input("Dia do agendamento\n"))
+            mes_agendamento = int(input("Mês do agendamento\n"))
+            ano_agendamento = int(input("Ano do agendamento\n"))
+            hora_agendamento = int(input("Hora desejada para o agendamento (ex: 9 para 09:00)\n"))
+            minutagem_agendamento = int(input("Informe a minutagem do agendamento (ex: ex: 30)\n"))
+            duracao_informada_agendamento = int(input("Duração da consulta\n"))
 
-        elif opcao == 0:
+            horario_consulta = datetime(ano_agendamento, mes_agendamento, dia_agendamento, hora_agendamento, minutagem_agendamento)
+
+            duracao_consulta = timedelta(duracao_informada_agendamento)
+
+            resultado = sistema_agenda.agendar_consulta(cpf_paciente, horario_consulta, duracao_consulta)
+
+            print(resultado)
+
+        elif opcao == "0":
             break
 
 if __name__ == "__main__":
