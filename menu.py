@@ -18,7 +18,9 @@ def main():
         opcao = input("Para escolher uma opção informe o número correspondente\n")
 
         if opcao == "1":
-            pass
+            print("\n" + "*"*20)
+            print("CONSULTAS AGENDADAS")
+            print(sistema_agenda.listar_consultas())
         elif opcao == "2":
             print("Para realizar o agendamento informe as seguintes informações:")
 
@@ -28,7 +30,7 @@ def main():
             ano_agendamento = int(input("Ano do agendamento\n"))
             hora_agendamento = int(input("Hora desejada para o agendamento (ex: 9 para 09:00)\n"))
             minutagem_agendamento = int(input("Informe a minutagem do agendamento (ex: ex: 30)\n"))
-            duracao_informada_agendamento = int(input("Duração da consulta\n"))
+            duracao_informada_agendamento = int(input("Duração da consulta (em minutos)\n"))
 
             horario_consulta = datetime(ano_agendamento, mes_agendamento, dia_agendamento, hora_agendamento, minutagem_agendamento)
             duracao_consulta = timedelta(minutes = duracao_informada_agendamento)
