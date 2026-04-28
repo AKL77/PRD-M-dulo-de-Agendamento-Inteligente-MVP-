@@ -87,7 +87,7 @@ class TestAgenda(TestCase):
     def test_listar_consultas_agendadas_cronologicamente(self):
         agenda = Agenda()
 
-        agenda.configurar_expediente_medico(dia_semana = 4, inicio = time(8, 0), fim = time(12, 0))
+        agenda.configurar_expediente_medico(dia_semana = 2, inicio = time(8, 0), fim = time(12, 0))
 
         horario_consulta_2 = datetime(2026, 4, 29, 10, 0)
         paciente_2 = "676.767.676-76"

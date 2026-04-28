@@ -11,6 +11,26 @@ class Agenda:
             "fim": fim
         }
 
+    # função feita integralmente com ia - apesar de entendê-la 
+    def listar_consultas(self):
+        if not self.consultas_marcadas:
+            return "Nenhuma consulta está agendada"
+        
+        listagem = []
+
+        for horario in sorted(self.consultas_marcadas.keys()):
+            paciente = self.consultas_marcadas[horario]["paciente"]
+            duracao = self.consultas_marcadas[horario]["duracao"]
+            horario_fim = horario + duracao
+
+            data_formatada = horario.strftime("%d/%m/%Y")
+            hora_inicio = horario.strftime("%H:%M")
+            hora_fim = horario_fim.strftime("%H:%M")
+
+            listagem.append(f"[{data_formatada}] {hora_inicio} às {hora_fim} | Paciente (CPF): {paciente}")
+
+        return "\n".join(listagem)
+
     def agendar_consulta(self, paciente, horario_consulta, duracao_consulta_em_potencial):
         dia_da_semana_consulta_em_potencial = horario_consulta.weekday()
         horas = horario_consulta.time()
