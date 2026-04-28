@@ -17,7 +17,7 @@ def main():
         opcao = input("Para escolher uma opção informe o número correspondente\n")
 
         if opcao == "1":
-            break
+            pass
         elif opcao == "2":
             print("Para realizar o agendamento informe as seguintes informações:")
 
@@ -31,7 +31,7 @@ def main():
 
             horario_consulta = datetime(ano_agendamento, mes_agendamento, dia_agendamento, hora_agendamento, minutagem_agendamento)
 
-            duracao_consulta = timedelta(duracao_informada_agendamento)
+            duracao_consulta = timedelta(minutes = duracao_informada_agendamento)
 
             resultado = sistema_agenda.agendar_consulta(cpf_paciente, horario_consulta, duracao_consulta)
 
@@ -39,6 +39,8 @@ def main():
 
         elif opcao == "0":
             break
+        else:
+            print("Opção inválida. Tente novamente. \n")
 
 if __name__ == "__main__":
     main()
