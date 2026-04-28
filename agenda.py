@@ -30,6 +30,29 @@ class Agenda:
             listagem.append(f"[{data_formatada}] {hora_inicio} às {hora_fim} | Paciente (CPF): {paciente}")
 
         return "\n".join(listagem)
+    
+    def listar_consultas_por_dia(self, data):
+        if not self.consultas_marcadas:
+            return "Nenhuma consulta está agendada"
+        
+        listagem = []
+
+        for horario in self.consultas_marcadas.keys():
+            if horario.date() == data:
+                paciente = self.consultas_marcadas[horario]["paciente"]
+                duracao = self.consultas_marcadas[horario]["duracao"]
+                horario_fim = horario + duracao
+
+                data_formatada = horario.strftime("%d/%m/%Y")
+                hora_inicio = horario.strftime("%H:%M")
+                hora_fim = horario_fim.strftime("%H:%M")
+
+                listagem.append(f"[{data_formatada}] {hora_inicio} às {hora_fim} | Paciente (CPF): {paciente}")
+        
+        if not self.consultas_marcadas:
+            return "Nenhuma consulta está agendada no dia informado"
+
+        return "\n".join(listagem)
 
     def agendar_consulta(self, paciente, horario_consulta, duracao_consulta_em_potencial):
         dia_da_semana_consulta_em_potencial = horario_consulta.weekday()

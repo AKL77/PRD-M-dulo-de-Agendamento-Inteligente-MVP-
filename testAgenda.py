@@ -139,8 +139,8 @@ class TestAgenda(TestCase):
         resultado = agenda.listar_consultas_por_dia(data_busca)
 
         resultado_esperado = (
-            "[29/04/2026] 08:00 às 09:00 | Paciente (CPF): 333.333.333-33\n"
-            "[29/04/2026] 10:00 às 10:30 | Paciente (CPF): 111.111.111-11"
+            "[29/04/2026] 10:00 às 10:30 | Paciente (CPF): 676.767.676-76\n"
+            "[29/04/2026] 08:00 às 08:45 | Paciente (CPF): 031.149.760-85"
         )
 
         self.assertEqual(resultado, resultado_esperado)
