@@ -19,6 +19,6 @@ C4Component
         Component(agenda, "Motor de Agendamento", "agenda.py", "Contém as regras de negócio, validação de interseção e armazenamento em dicionários.")
     }
 
-    Rel(usuario, menu, "Digita comandos no terminal")
-    Rel(menu, agenda, "Chama métodos e passa parâmetros", "Python Import")
+    Rel(usuario, menu, "")
+    Rel(menu, agenda, "")
 ```
