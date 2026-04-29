@@ -1,6 +1,8 @@
 from agenda import Agenda
 from datetime import time, timedelta, datetime
 
+from enums import DiasDaSemana
+
 def exibir_menu_inicial():
     print("\n" + "*"*20)
     print("Menu Inicial")
@@ -73,6 +75,12 @@ def main():
             print("5 -> Sábado")
             print("6 -> Domingo")
             dia_semana = int(input())
+
+            valores_validos = [dia.value for dia in DiasDaSemana]
+
+            if dia_semana not in valores_validos:
+                print("\nDia da semana inválido.")
+                continue
 
             hora_inicio_expediente = int(input("Hora de início do expediente: (ex: 8 para 08:00)\n"))
             minutagem_inicio_expediente = int(input("Minutagem de início do expediente: (ex: 30)\n"))
