@@ -2,17 +2,17 @@
 C4Context
     title Diagrama de Contexto (Nível 1) - Sistema de Agendamento
     
-    Person(usuario, "Recepcionista / Médico", "Interage com o terminal para gerenciar horários e pacientes.")
+    Person(usuario, "Recepcionista", "Interage com o terminal para gerenciar consultas  .")
     System(sistema, "Agendamento Inteligente", "Permite configuração de expediente e marcação de consultas evitando conflitos de horários.")
 
-    Rel(usuario, sistema, "Configura horários e agenda consultas usando")
+    Rel(usuario, sistema, "")
 ```
 
 ```mermaid
 C4Component
     title Diagrama de Componentes (Nível 3) - Aplicação Console
     
-    Person(usuario, "Recepcionista / Médico", "Interage com o terminal.")
+    Person(usuario, "Recepcionista", "Interage com o terminal.")
     
     Container_Boundary(app, "Aplicação Python") {
         Component(menu, "Menu CLI", "menu.py", "Exibe as opções, captura os inputs do teclado e formata os dados.")
