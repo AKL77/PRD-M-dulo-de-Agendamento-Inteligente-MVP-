@@ -1,3 +1,4 @@
+```mermaid
 C4Context
     title Diagrama de Contexto (Nível 1) - Sistema de Agendamento
     
@@ -5,7 +6,9 @@ C4Context
     System(sistema, "Agendamento Inteligente", "Permite configuração de expediente e marcação de consultas evitando conflitos de horários.")
 
     Rel(usuario, sistema, "Configura horários e agenda consultas usando")
+```
 
+```mermaid
 C4Component
     title Diagrama de Componentes (Nível 3) - Aplicação Console
     
@@ -18,3 +21,4 @@ C4Component
 
     Rel(usuario, menu, "Digita comandos no terminal")
     Rel(menu, agenda, "Chama métodos e passa parâmetros", "Python Import")
+```
