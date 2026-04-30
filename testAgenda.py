@@ -147,4 +147,17 @@ class TestAgenda(TestCase):
 
         self.assertEqual(resultado, resultado_esperado)
 
+    def test_agendamento_consulta_horario_extrapola_horario_contemplado_pelo_medico(self):
+        agenda = Agenda()
+
+        agenda.configurar_expediente_medico(dia_semana = DiasDaSemana.SEGUNDA.value, inicio = time(8, 0), fim = time(12, 0))
+
+        horario_consulta = datetime(2026, 5, 4, 11, 45)
+
+        paciente = "031.149.760-85"
+        duracao_consulta = timedelta(minutes=30)
+        agendamento = agenda.agendar_consulta(paciente, horario_consulta, duracao_consulta)
+
+        self.assertEqual(agendamento, "O horário informado não é contemplado pelo médico")
+
 

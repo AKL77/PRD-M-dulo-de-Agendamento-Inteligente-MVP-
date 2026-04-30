@@ -43,7 +43,7 @@ def main():
                     print("*"*30 + "\n")
                     
                 except ValueError:
-                    print("\nFormato inválido. Tente novamente!")
+                    print("\nEntrada utilizada inválida.")
 
             elif escolha == "2":
                 print("\n" + "*"*20)
@@ -74,52 +74,50 @@ def main():
 
                 print(resultado)
             except ValueError:
-                print("\nFormato inválido! Tente novamente.")
+                print("\nEntrada utilizada inválida.")
         elif opcao == "3":
-            print("Para editar o expediente do médico é necessário informar as seguintes informações")
-
-            print("Qual dia da semana deseja editar:")
-            print("0 -> Segunda-feira")
-            print("1 -> Terça-feira")
-            print("2 -> Quarta-feira")
-            print("3 -> Quinta-feira")
-            print("4 -> Sexta-feira")
-            print("5 -> Sábado")
-            print("6 -> Domingo")
-            dia_semana = int(input())
-
-            valores_validos = [dia.value for dia in DiasDaSemana]
-
-            if dia_semana not in valores_validos:
-                print("\nDia da semana inválido.")
-                continue
-
-            hora_informada = input("Informe o horário de incício do expediente. Siga o seguinte formato hh:mm \n")
-            hora_string, minuto_string = hora_informada.split(":")
-            hora_inicio_expediente = int(hora_string)
-            minutagem_inicio_expediente = int(minuto_string)
-            print(f"Horário de início informado: {hora_inicio_expediente:02d}:{minutagem_inicio_expediente:02d}")
-
-
-            hora_informada = input("Informe o horário de fim do expediente. Siga o seguinte formato hh:mm \n")
-            hora_string, minuto_string = hora_informada.split(":")
-            hora_fim_expediente = int(hora_string)
-            minutagem_fim_expediente = int(minuto_string)
-            print(f"Horário de fim informado: {hora_fim_expediente:02d}:{minutagem_fim_expediente:02d}")
-
-            inicio = time(hora_inicio_expediente, minutagem_inicio_expediente)
-            fim = time(hora_fim_expediente, minutagem_fim_expediente)
-            sistema_agenda.configurar_expediente_medico(dia_semana, inicio, fim)
-
             try:
+                print("Para editar o expediente do médico é necessário informar as seguintes informações")
+
+                print("Qual dia da semana deseja editar:")
+                print("0 -> Segunda-feira")
+                print("1 -> Terça-feira")
+                print("2 -> Quarta-feira")
+                print("3 -> Quinta-feira")
+                print("4 -> Sexta-feira")
+                print("5 -> Sábado")
+                print("6 -> Domingo")
+                dia_semana = int(input())
+
+                valores_validos = [dia.value for dia in DiasDaSemana]
+
+                if dia_semana not in valores_validos:
+                    print("\nDia da semana inválido.")
+                    continue
+
+                hora_informada = input("Informe o horário de incício do expediente. Siga o seguinte formato hh:mm \n")
+                hora_string, minuto_string = hora_informada.split(":")
+                hora_inicio_expediente = int(hora_string)
+                minutagem_inicio_expediente = int(minuto_string)
+                print(f"Horário de início informado: {hora_inicio_expediente:02d}:{minutagem_inicio_expediente:02d}")
+
+
+                hora_informada = input("Informe o horário de fim do expediente. Siga o seguinte formato hh:mm \n")
+                hora_string, minuto_string = hora_informada.split(":")
+                hora_fim_expediente = int(hora_string)
+                minutagem_fim_expediente = int(minuto_string)
+                print(f"Horário de fim informado: {hora_fim_expediente:02d}:{minutagem_fim_expediente:02d}")
+
+                inicio = time(hora_inicio_expediente, minutagem_inicio_expediente)
+                fim = time(hora_fim_expediente, minutagem_fim_expediente)
+
                 if inicio >= fim:
                     print("\nErro: O horário de fim deve ser posterior ao horário de início.")
                 else:
                     sistema_agenda.configurar_expediente_medico(dia_semana, inicio, fim)
                     print(f"\nExpediente configurado com sucesso: {inicio.strftime('%H:%M')} às {fim.strftime('%H:%M')}")
-
             except ValueError:
-                print("\nFormato de hora inválido.")
+                print("\nEntrada utilizada inválida.")
         elif opcao == "0":
             break
         else:
