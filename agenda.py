@@ -64,11 +64,14 @@ class Agenda:
         incio_expediente = self.grade_horarios_de_atendimento[dia_da_semana_consulta_em_potencial]["inicio"]
         fim_expediente = self.grade_horarios_de_atendimento[dia_da_semana_consulta_em_potencial]["fim"]
 
-        if not (incio_expediente <= horas <= fim_expediente):
-            return "O horário informado não é contemplado pelo médico"
-
         inicio_agendamento_em_potencial = horario_consulta
         fim_agendamento_em_potencial = inicio_agendamento_em_potencial + duracao_consulta_em_potencial
+
+        horas_fim_consulta = fim_agendamento_em_potencial.time()
+
+        if horas < incio_expediente or horas_fim_consulta > fim_expediente:
+            return "O horário informado não é contemplado pelo médico"
+
 
         for horario_existente in self.consultas_marcadas:
             inicio_de_agendamento_existente = horario_existente

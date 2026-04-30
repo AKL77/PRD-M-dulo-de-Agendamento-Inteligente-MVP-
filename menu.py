@@ -28,9 +28,11 @@ def main():
             if escolha == "1":
                 print("Serão necessárias as seguintes informações para verificar as consultas agendadas em um dia específico:")
                 try:
-                    ano_consulta = int(input("Informe o ano:\n"))
-                    mes_consulta = int(input("Informe o mês:\n"))
-                    dia_consulta = int(input("Informe o dia:\n"))
+                    data_informada = input("Informe a data desejada para o agendamento. Siga o seguinte formato dd/mm/aaaa")
+                    dia_string, mes_string, ano_string = data_informada.split("/")
+                    dia_consulta = int(dia_string)
+                    mes_consulta = int(mes_string)
+                    ano_consulta = int(ano_string)
 
                     data_buscada = datetime(ano_consulta, mes_consulta, dia_consulta).date()
                     
@@ -41,7 +43,7 @@ def main():
                     print("*"*30 + "\n")
                     
                 except ValueError:
-                    print("\nErro: A data informada é inválida.")
+                    print("\nFormato inválido. Tente novamente!")
 
             elif escolha == "2":
                 print("\n" + "*"*20)
@@ -51,18 +53,28 @@ def main():
             print("Para realizar o agendamento informe as seguintes informações:")
 
             cpf_paciente = input("CPF do paciente\n")
-            dia_agendamento = int(input("Dia do agendamento\n"))
-            mes_agendamento = int(input("Mês do agendamento\n"))
-            ano_agendamento = int(input("Ano do agendamento\n"))
-            hora_agendamento = int(input("Hora desejada para o agendamento (ex: 9 para 09:00)\n"))
-            minutagem_agendamento = int(input("Informe a minutagem do agendamento (ex: ex: 30)\n"))
-            duracao_informada_agendamento = int(input("Duração da consulta (em minutos)\n"))
 
-            horario_consulta = datetime(ano_agendamento, mes_agendamento, dia_agendamento, hora_agendamento, minutagem_agendamento)
-            duracao_consulta = timedelta(minutes = duracao_informada_agendamento)
-            resultado = sistema_agenda.agendar_consulta(cpf_paciente, horario_consulta, duracao_consulta)
+            try:
+                data_informada = input("Informe a data desejada para o agendamento. Siga o seguinte formato dd/mm/aaaa\n")
+                dia_string, mes_string, ano_string = data_informada.split("/")
+                dia_agendamento = int(dia_string)
+                mes_agendamento = int(mes_string)
+                ano_agendamento = int(ano_string)
 
-            print(resultado)
+                hora_informada = input("Informe o horário desejado. Siga o seguinte formato hh:mm\n")
+                hora_string, minuto_string = hora_informada.split(":")
+                hora_agendamento = int(hora_string)
+                minutagem_agendamento = int(minuto_string)
+
+                duracao_informada_agendamento = int(input("Informe a Duração da consulta (em minutos)\n"))
+
+                horario_consulta = datetime(ano_agendamento, mes_agendamento, dia_agendamento, hora_agendamento, minutagem_agendamento)
+                duracao_consulta = timedelta(minutes = duracao_informada_agendamento)
+                resultado = sistema_agenda.agendar_consulta(cpf_paciente, horario_consulta, duracao_consulta)
+
+                print(resultado)
+            except ValueError:
+                print("\nFormato inválido! Tente novamente.")
         elif opcao == "3":
             print("Para editar o expediente do médico é necessário informar as seguintes informações")
 
@@ -82,12 +94,17 @@ def main():
                 print("\nDia da semana inválido.")
                 continue
 
-            hora_inicio_expediente = int(input("Hora de início do expediente: (ex: 8 para 08:00)\n"))
-            minutagem_inicio_expediente = int(input("Minutagem de início do expediente: (ex: 30)\n"))
+            hora_informada = input("Informe o horário de incício do expediente. Siga o seguinte formato hh:mm \n")
+            hora_string, minuto_string = hora_informada.split(":")
+            hora_inicio_expediente = int(hora_string)
+            minutagem_inicio_expediente = int(minuto_string)
             print(f"Horário de início informado: {hora_inicio_expediente:02d}:{minutagem_inicio_expediente:02d}")
 
-            hora_fim_expediente = int(input("Horário de fim do expediente: (ex: 18 para 18:00)\n"))
-            minutagem_fim_expediente = int(input("Minutagem de fim do expediente: (ex: 30)\n"))
+
+            hora_informada = input("Informe o horário de fim do expediente. Siga o seguinte formato hh:mm \n")
+            hora_string, minuto_string = hora_informada.split(":")
+            hora_fim_expediente = int(hora_string)
+            minutagem_fim_expediente = int(minuto_string)
             print(f"Horário de fim informado: {hora_fim_expediente:02d}:{minutagem_fim_expediente:02d}")
 
             inicio = time(hora_inicio_expediente, minutagem_inicio_expediente)
